@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Chatbot & WhatsApp Automation Demo</title>
+<style>
+body{font-family:Arial;background:#f4f6f8;padding:20px}
+.box{background:#fff;padding:15px;margin:15px 0;border-radius:6px}
+button{padding:6px 10px;margin:5px}
+#chat,#wa{border:1px solid #ccc;padding:10px;height:150px;overflow:auto}
+footer{font-size:12px;text-align:center;color:#666;margin-top:30px}
+</style>
+</head>
+
+<body>
+
+<h2>AI Chatbot & WhatsApp Automation – MVP Demo</h2>
+
+<div class="box">
+<h3>🤖 Website Chatbot Demo</h3>
+<div id="chat"></div>
+<input id="q" placeholder="Ask something">
+<button onclick="chat()">Send</button>
+</div>
+
+<div class="box">
+<h3>💬 WhatsApp Automation Demo</h3>
+<div id="wa">
+<p><b>Bot:</b> Hi! Reply 1️⃣ Info 2️⃣ Support</p>
+</div>
+<button onclick="wa('1')">1</button>
+<button onclick="wa('2')">2</button>
+</div>
+
+<footer>
+This is a Minimum Viable Product (MVP) demo showing AI website chatbot
+and WhatsApp automation workflows.
+</footer>
+
+<script>
+function chat(){
+ let c=document.getElementById("chat");
+ c.innerHTML+=`<p><b>You:</b> ${q.value}</p>
+ <p><b>Bot:</b> This is an AI chatbot demo.</p>`;
+ q.value="";
+ c.scrollTop=c.scrollHeight;
+}
+
+function wa(x){
+ let r=x==1?"Product information sent":"Support team will contact you";
+ wa.innerHTML+=`<p><b>You:</b> ${x}</p><p><b>Bot:</b> ${r}</p>`;
+ wa.scrollTop=wa.scrollHeight;
+}
+</script>
+
+</body>
+</html>

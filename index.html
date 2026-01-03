@@ -1,55 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>AI Chatbot & WhatsApp Automation – Gemini MVP</title>
+<title>AI Chatbot & WhatsApp Automation – MVP</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style>
-body{
-  font-family: Arial, sans-serif;
-  background:#f4f6f8;
-  margin:0;
-  padding:20px;
-}
-header{
-  background:#111827;
-  color:#fff;
-  padding:20px;
-  border-radius:8px;
-}
-section{
-  background:#fff;
-  margin-top:20px;
-  padding:15px;
-  border-radius:8px;
-}
+body{font-family:Arial;background:#f4f6f8;margin:0;padding:20px}
+header{background:#111827;color:#fff;padding:20px;border-radius:8px}
+section{background:#fff;margin-top:20px;padding:15px;border-radius:8px}
 h2{color:#111827}
-button{
-  padding:8px 14px;
-  margin-top:6px;
-  background:#2563eb;
-  color:#fff;
-  border:none;
-  border-radius:4px;
-}
-input{
-  padding:8px;
-  width:95%;
-  margin-top:6px;
-}
-.box{
-  border:1px solid #ccc;
-  height:200px;
-  overflow:auto;
-  padding:10px;
-  margin-top:10px;
-}
-footer{
-  text-align:center;
-  font-size:12px;
-  color:#666;
-  margin:30px 0 10px;
-}
+input,button{padding:8px;margin-top:6px}
+button{background:#2563eb;color:#fff;border:none;border-radius:4px}
+.box{border:1px solid #ccc;height:220px;overflow:auto;padding:10px}
+footer{text-align:center;font-size:12px;color:#666;margin-top:30px}
 </style>
 </head>
 
@@ -57,88 +19,82 @@ footer{
 
 <header>
 <h1>AI Chatbot & WhatsApp Automation</h1>
-<p>Advanced MVP with Google Gemini AI</p>
+<p>Advanced MVP – GitHub Pages Deployment</p>
 </header>
 
 <section>
-<h2>🤖 Website AI Chatbot (Gemini Powered)</h2>
-<p>Ask anything about our chatbot or WhatsApp automation.</p>
-
+<h2>🤖 Website Chatbot Demo</h2>
 <div id="chat" class="box"></div>
-<input id="q" placeholder="Type your message here">
+<input id="q" placeholder="Ask about chatbot, pricing, WhatsApp">
 <button onclick="chat()">Send</button>
 </section>
 
 <section>
 <h2>💬 WhatsApp Automation Demo</h2>
-<p>Simulated business automation workflow.</p>
-
 <div id="wa" class="box">
 <p><b>Bot:</b> Hi! Type <b>Hi</b> to begin.</p>
 </div>
-
 <input id="w" placeholder="Type: Hi / 1 / 2 / 3">
 <button onclick="wa()">Send</button>
 </section>
 
 <section>
-<h2>Architecture Overview</h2>
+<h2>Architecture</h2>
 <ul>
-<li>Frontend hosted on GitHub Pages</li>
-<li>Backend via Cloudflare Worker</li>
-<li>AI powered by Google Gemini API</li>
-<li>Secure, scalable, self-hosted design</li>
+<li>Frontend: GitHub Pages</li>
+<li>Chatbot Logic: Browser-based</li>
+<li>WhatsApp Automation: Workflow demo</li>
+<li>Future: AI model + WhatsApp Cloud API</li>
+</ul>
+</section>
+
+<section>
+<h2>Roadmap</h2>
+<ul>
+<li>Phase 1: MVP demo (current)</li>
+<li>Phase 2: AI API integration</li>
+<li>Phase 3: WhatsApp Cloud API</li>
+<li>Phase 4: Dashboard & analytics</li>
 </ul>
 </section>
 
 <footer>
-<p>
-This website is a <b>Minimum Viable Product (MVP)</b> demonstrating
-AI chatbot and WhatsApp automation workflows.
-</p>
-<p>© 2026 – Gemini AI MVP</p>
+This is a <b>Minimum Viable Product (MVP)</b> demonstrating chatbot and
+WhatsApp automation workflows.
 </footer>
 
 <script>
-async function chat(){
-  let c = document.getElementById("chat");
-  let text = q.value;
+function chat(){
+  let c=document.getElementById("chat");
+  let t=q.value.toLowerCase();
+  let r="I can help with chatbots and automation.";
 
-  if(!text) return;
+  if(t.includes("price")) r="Our solution is affordable and scalable.";
+  if(t.includes("whatsapp")) r="We automate WhatsApp replies for businesses.";
+  if(t.includes("contact")) r="Please leave your email. We will contact you.";
+  if(t.includes("hi")) r="Hello! How can I help you today?";
 
-  c.innerHTML += `<p><b>You:</b> ${text}</p>`;
-  q.value = "";
-
-  c.innerHTML += `<p><i>Bot is typing...</i></p>`;
-  c.scrollTop = c.scrollHeight;
-
-  const res = await fetch("https://YOUR-WORKER-URL.workers.dev", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: text })
-  });
-
-  const data = await res.json();
-
-  c.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
-  c.scrollTop = c.scrollHeight;
+  c.innerHTML+=`<p><b>You:</b> ${q.value}</p>`;
+  setTimeout(()=>{
+    c.innerHTML+=`<p><b>Bot:</b> ${r}</p>`;
+    c.scrollTop=c.scrollHeight;
+  },600);
+  q.value="";
 }
 
 function wa(){
-  let box = document.getElementById("wa");
-  let t = w.value.toLowerCase();
-
-  const flow = {
+  let box=document.getElementById("wa");
+  let t=w.value.toLowerCase();
+  let flow={
     "hi":"Welcome! Reply 1️⃣ Menu 2️⃣ Order Status 3️⃣ Support",
-    "1":"Today's Menu: Pizza, Burger, Biryani",
+    "1":"Menu: Pizza, Burger, Biryani",
     "2":"Please share your order ID",
     "3":"Support team will contact you shortly"
   };
-
-  box.innerHTML += `<p><b>You:</b> ${w.value}</p>`;
-  box.innerHTML += `<p><b>Bot:</b> ${flow[t] || "Please type Hi to start"}</p>`;
-  box.scrollTop = box.scrollHeight;
-  w.value = "";
+  box.innerHTML+=`<p><b>You:</b> ${w.value}</p>`;
+  box.innerHTML+=`<p><b>Bot:</b> ${flow[t]||"Type Hi to start"}</p>`;
+  box.scrollTop=box.scrollHeight;
+  w.value="";
 }
 </script>
 
